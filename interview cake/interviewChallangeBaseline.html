@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+
+<body>
+    <meta charset="UTF-8">
+    <script>
+        var input = [1, 3, 5, 7];
+
+        function getProductsOfAllIntsExceptAtIndex(input) {
+            var output = input.slice();
+            for (var i in input) {
+                output[i] = 1;
+                for (var j in input) {
+                    if (j !== i) {
+                        output[i] *= input[j];
+                    }
+                }
+            }
+            return output;
+        }
+
+        /*var new_array = arr.map(function callback(currentValue, index, array) {
+            // Return element for new_array
+        }[, thisArg])*/
+
+        function betterProductOfAllIntsExceptAtIndex(input) {
+            return input.map((_value, index) => {
+                let multArr = input.slice()
+                delete multArr[index];
+                return multArr.reduce((accr, value) => {
+                    return accr * value
+                });
+            });
+        }
+
+        console.log('1st:', getProductsOfAllIntsExceptAtIndex(input));
+        console.log('2nd:', betterProductOfAllIntsExceptAtIndex(input));
+    </script>
+</body>
+
+</html>

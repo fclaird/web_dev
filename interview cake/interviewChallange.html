@@ -4,13 +4,16 @@
 <body>
     <meta charset="UTF-8">
     <script>
-        var input = [1, 3, 5, 7];
+        let input = Array(1000);
+        input.fill(2);
+        let d = new Date();
+
 
         function getProductsOfAllIntsExceptAtIndex(input) {
-            var output = input.slice();
-            for (var i in input) {
+            let output = input.slice();
+            for (let i in input) {
                 output[i] = 1;
-                for (var j in input) {
+                for (let j in input) {
                     if (j !== i) {
                         output[i] *= input[j];
                     }
@@ -19,9 +22,18 @@
             return output;
         }
 
-        /*var new_array = arr.map(function callback(currentValue, index, array) {
-            // Return element for new_array
-        }[, thisArg])*/
+        function getProductsOfAllIntsExceptAtIndexBravo(input) {
+            let productArray = temp = input.slice();
+            for (let i in input) {
+                delete temp[i];
+                productArray[i] = 1;
+                for (let j in input) {
+                    productArray[i] *= temp[j];
+                }
+            }
+            return productArray;
+        }
+
 
         function betterProductOfAllIntsExceptAtIndex(input) {
             return input.map((_value, index) => {
@@ -33,8 +45,18 @@
             });
         }
 
-        console.log('1st:', getProductsOfAllIntsExceptAtIndex(input));
-        console.log('2nd:', betterProductOfAllIntsExceptAtIndex(input));
+
+        function run(call) {
+            let t0 = performance.now();
+            let algorithm = call(input);
+            let t1 = performance.now();
+            console.log((t1 - t0));
+        }
+
+
+        run(getProductsOfAllIntsExceptAtIndex);
+        run(getProductsOfAllIntsExceptAtIndexBravo);
+        run(betterProductOfAllIntsExceptAtIndex);
     </script>
 </body>
 

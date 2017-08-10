@@ -4,59 +4,27 @@
 <body>
     <meta charset="UTF-8">
     <script>
-        let input = Array(1000);
-        input.fill(2);
-        let d = new Date();
-
-
-        function getProductsOfAllIntsExceptAtIndex(input) {
-            let output = input.slice();
-            for (let i in input) {
-                output[i] = 1;
-                for (let j in input) {
-                    if (j !== i) {
-                        output[i] *= input[j];
-                    }
+        function test(num1, num2) {
+            if (num1 % 2 === 0 || num2 % 2 === 0) {
+                if (num1 < 9 && num2 < 9) {
+                    return true;
+                } else {
+                    return false;
                 }
+            } else {
+                return false;
             }
-            return output;
         }
 
-        function getProductsOfAllIntsExceptAtIndexBravo(input) {
-            let productArray = temp = input.slice();
-            for (let i in input) {
-                delete temp[i];
-                productArray[i] = 1;
-                for (let j in input) {
-                    productArray[i] *= temp[j];
-                }
-            }
-            return productArray;
+        function ternary(num1, num2) {
+            num1 % 2 === 0 || num2 % 2 === 0 && (num1 < 9 && num2 < 9) ? true : false;
         }
-
-
-        function betterProductOfAllIntsExceptAtIndex(input) {
-            return input.map((_value, index) => {
-                let multArr = input.slice()
-                delete multArr[index];
-                return multArr.reduce((accr, value) => {
-                    return accr * value
-                });
-            });
-        }
-
-
-        function run(call) {
-            let t0 = performance.now();
-            let algorithm = call(input);
-            let t1 = performance.now();
-            console.log((t1 - t0));
-        }
-
-
-        run(getProductsOfAllIntsExceptAtIndex);
-        run(getProductsOfAllIntsExceptAtIndexBravo);
-        run(betterProductOfAllIntsExceptAtIndex);
+        console.log(test(2, 3));
+        console.log(ternary(2, 3));
+        console.log(test(5, 3));
+        console.log(ternary(5, 3));
+        console.log(test(2, 12));
+        console.log(ternary(2, 12));
     </script>
 </body>
 
